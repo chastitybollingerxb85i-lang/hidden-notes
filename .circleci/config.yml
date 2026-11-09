@@ -1,0 +1,1373 @@
+version: 2.1
+
+jobs:
+  msTimer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: JZ packaging
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; printenv | head -10 | sort; true ; } > /tmp/build.d/garden.zinc.quick.polar
+            echo "gate update-retry-reload: $(wc -c </tmp/build.d/garden.zinc.quick.polar) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'garden.zinc.quick.polar'
+  update-retry-reload:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/garden.zinc.quick.polar
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  route20041202:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: idk retire the landing page
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; for w in {1..7}; do printf '%d %d\n' $w $((w * 3)); done; true ; } > /tmp/build.d/WkaU4kmS9NpF8rB
+            echo "gate RolloutPipeline: $(wc -c </tmp/build.d/WkaU4kmS9NpF8rB) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'WkaU4kmS9NpF8rB'
+  RolloutPipeline:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/WkaU4kmS9NpF8rB
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  armor-header:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: We get to demux the sprite sheet
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 1 -type d -name '*.txt' -size -10k -perm -644 -printf "%u:%g %p\n" |wc -l; true ; } > /tmp/build.d/Hollow
+            echo "gate v3-alpha: $(wc -c </tmp/build.d/Hollow) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'Hollow'
+  v3-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/Hollow
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  b6-6f-39:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: dispatchBackordersJob
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; find /run -maxdepth 2 -type d -name '*.sock' -exec du -sh '{}' ';' 2>/dev/null | wc -l; true ; } > /tmp/build.d/ni
+            echo "gate cerberus-v2: $(wc -c </tmp/build.d/ni) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'ni'
+  cerberus-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/ni
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  donut-promise:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: OPS81
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; cut -d= -f2- /etc/os-release|sort|rev|cut -c1-14; true ; } > /tmp/build.d/6rgsmhi0php
+            echo "gate artifacts: $(wc -c </tmp/build.d/6rgsmhi0php) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '6rgsmhi0php'
+  artifacts:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/6rgsmhi0php
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  panelShouldVisit:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Point 003 isolation
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; echo -n "don't panic"|grep -o .|sort|uniq -c|sort -rn|head -n3; true ; } > /tmp/build.d/GzVxY9A5zvT
+            echo "gate API-195: $(wc -c </tmp/build.d/GzVxY9A5zvT) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'GzVxY9A5zvT'
+  API-195:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  clipProtocol:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Set sail for compression
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; grep -rIi color /etc/security 2>/dev/null|tail -n8; true ; } > /tmp/build.d/kappaReefTensor
+            echo "gate orion-rev: $(wc -c </tmp/build.d/kappaReefTensor) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'kappaReefTensor'
+  orion-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  Bundle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Cancel restore
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; ls -a -d --width=72 /usr/sbin/*user* | sort -f; true ; } > /tmp/build.d/ATOLL_EAST_SWEEP
+            echo "gate qa-2: $(wc -c </tmp/build.d/ATOLL_EAST_SWEEP) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'ATOLL_EAST_SWEEP'
+  qa-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  imageDestroyCallback:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: tear down status page item 036
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; ls -Q -I "[a-m]*" /etc/profile.d | awk '{print length, $0}' | sort -n | tail -n 3; true ; } > /tmp/build.d/dc3570
+            echo "gate q3-smoke: $(wc -c </tmp/build.d/dc3570) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'dc3570'
+  q3-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  MATRIX_SIMPLE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: afterEvalMetricSharding
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; grep -w bash /etc/passwd | wc -l; true ; } > /tmp/build.d/lynx_20201009
+            echo "gate aug25-cleanup: $(wc -c </tmp/build.d/lynx_20201009) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'lynx_20201009'
+  aug25-cleanup:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  id_054357_soft:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: JULY SPAWN CRAFTING RECIPES
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; ls -vXs /usr/lib/os-release | tac; true ; } > /tmp/build.d/520edd49-362e-c2cc
+            echo "gate Run_App3: $(wc -c </tmp/build.d/520edd49-362e-c2cc) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '520edd49-362e-c2cc'
+  Run_App3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  processprofile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: rebalance the watchdog and pray
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'the quick brown fox jumps over the lazy dog' | sed -n 's/brown/beetle/p'; true ; } > /tmp/build.d/19.10.2027
+            echo "gate v2-nightly4: $(wc -c </tmp/build.d/19.10.2027) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '19.10.2027'
+  v2-nightly4:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/19.10.2027
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  eded:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: The workers are scheduled here
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; awk 'BEGIN{FS=":"} length($1) > 5 {print $1}' /etc/passwd | head -n5; true ; } > /tmp/build.d/7HxbGZXXr
+            echo "gate validate-full-artifact-bundle: $(wc -c </tmp/build.d/7HxbGZXXr) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '7HxbGZXXr'
+  validate-full-artifact-bundle:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/7HxbGZXXr
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  device_unlock_eager:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Balance Leaderboard And Profile
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; command ls -A -h . | nl; true ; } > /tmp/build.d/pSI
+            echo "gate dotnet8-ship: $(wc -c </tmp/build.d/pSI) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'pSI'
+  dotnet8-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  aquax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Brew pick potion
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; echo "spam and eggs" >/tmp/yellow_about_seed_copy.txt; wc -c /tmp/yellow_about_seed_copy.txt; true ; } > /tmp/build.d/md5_cb161a69331
+            echo "gate green-light: $(wc -c </tmp/build.d/md5_cb161a69331) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'md5_cb161a69331'
+  green-light:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  aud_6_12_40:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: CHECKPOINT 3 INTEGRATION SUITE REVIEW
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; if test -S /dev/log;then echo "Y"; fi; true ; } > /tmp/build.d/EAST_RAVEN
+            echo "gate europa-beta: $(wc -c </tmp/build.d/EAST_RAVEN) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'EAST_RAVEN'
+  europa-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  quebec-pointer:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: ok go
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; sed -E 's/[[:space:]]+$//' ~/.bashrc | head -n 15; true ; } > /tmp/build.d/golden.thicket.blue.lagoon.payload
+            echo "gate dotnet8-fmt: $(wc -c </tmp/build.d/golden.thicket.blue.lagoon.payload) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'golden.thicket.blue.lagoon.payload'
+  dotnet8-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/golden.thicket.blue.lagoon.payload
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  NEG324:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: H hour purge
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; find /var/tmp -maxdepth 3 -type d -exec echo dir: {} \; 2>/dev/null | nl; true ; } > /tmp/build.d/ttgnwILASFbMS4
+            echo "gate whiskey-9: $(wc -c </tmp/build.d/ttgnwILASFbMS4) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'ttgnwILASFbMS4'
+  whiskey-9:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  broker-v5-scratch-amd64:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: BIZ 1
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; printf '%s\n' sydney osaka delhi >${TMPDIR:-/tmp}/replicastyle.csv && wc -l ${TMPDIR:-/tmp}/replicastyle.csv; true ; } > /tmp/build.d/proxyrouterbison
+            echo "gate b: $(wc -c </tmp/build.d/proxyrouterbison) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'proxyrouterbison'
+  b:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/proxyrouterbison
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  triUuidPanel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Lastly bump the service mesh
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; for c in monday thursday wednesday saturday sunday; do echo "${c^}"; done|tac; true ; } > /tmp/build.d/87.29.195
+            echo "gate v6-preview: $(wc -c </tmp/build.d/87.29.195) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '87.29.195'
+  v6-preview:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/87.29.195
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  BPJWP-25275:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Water Pump v7 Cold Start
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; echo 'version 2.0' | tail -5 | rev | tr -s ' ' | head -8; true ; } > /tmp/build.d/v_50037
+            echo "gate ship-it: $(wc -c </tmp/build.d/v_50037) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'v_50037'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  TOP3D:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Only if the MFA settings are down
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; stdbuf -oL echo "status: ok"; true ; } > /tmp/build.d/DSC_66007
+            echo "gate canary-v2: $(wc -c </tmp/build.d/DSC_66007) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'DSC_66007'
+  canary-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  cntObj:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Encode AAC
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; function is_even { local a=$1 b=$2; echo $(( a > b ? a : b )); }; is_even 15 27; true ; } > /tmp/build.d/blake_3121173
+            echo "gate rm-cache: $(wc -c </tmp/build.d/blake_3121173) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'blake_3121173'
+  rm-cache:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/blake_3121173
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  seed-length:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Unit 26 Roll Up Customer Records
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; for word in wolf goose owl bear cat fox; do printf '%s\n' "${word}"; done; true ; } > /tmp/build.d/Y9n
+            echo "gate shippit-80: $(wc -c </tmp/build.d/Y9n) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'Y9n'
+  shippit-80:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  espressoPiston:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: shuffle the error rows pls
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; awk -F : '{print $1, $7}' /etc/passwd | tr a-z A-Z | wc -l; true ; } > /tmp/build.d/7jdgr
+            echo "gate all-greens: $(wc -c </tmp/build.d/7jdgr) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '7jdgr'
+  all-greens:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/pSI
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  Price2SVM:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Teardown
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; date +%s%N | sha256sum | head -c 9; echo; true ; } > /tmp/build.d/_wip_305fb9
+            echo "gate callisto-beta: $(wc -c </tmp/build.d/_wip_305fb9) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - '_wip_305fb9'
+  callisto-beta:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/_wip_305fb9
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  wilson-brad-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Rest for 2 bars
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; ls ~ | pr -3 -t | head -n 15; true ; } > /tmp/build.d/xx_452737c2e5357e46
+            echo "gate feb5-canary: $(wc -c </tmp/build.d/xx_452737c2e5357e46) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'xx_452737c2e5357e46'
+  feb5-canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  Stale:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Remit And Sign Off On Ledger
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; printf %s "that's all folks"|sha224sum|awk '{print $1}'; true ; } > /tmp/build.d/klO
+            echo "gate victor: $(wc -c </tmp/build.d/klO) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'klO'
+  victor:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  pickActive:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Halftime indexing
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; cat /proc/meminfo | grep --word-regexp 'Buffers' | wc -l; true ; } > /tmp/build.d/SSH_Photon_RAM.hw
+            echo "gate bob-ship: $(wc -c </tmp/build.d/SSH_Photon_RAM.hw) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'SSH_Photon_RAM.hw'
+  bob-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/GzVxY9A5zvT
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+  JTXLm:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: BLD 1839 ingress rule restart
+          command: |
+            mkdir -p /tmp/build.d
+            { set +o pipefail 2>/dev/null; mkdir -pv "/tmp/hotel-vendor-batch"/mock/role; true ; } > /tmp/build.d/moltenSilverNode
+            echo "gate BUILD_UAT: $(wc -c </tmp/build.d/moltenSilverNode) bytes total"
+      - persist_to_workspace:
+          root: /tmp/build.d
+          paths:
+            - 'moltenSilverNode'
+  BUILD_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/build.d
+      - run:
+          name: Pull 5
+          command: |
+            cat /tmp/build.d/moltenSilverNode
+      - run:
+          name: Clone project
+          command: git clone --depth 3 -q --no-single-branch --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Fetch fixtures
+          command: tar --extract --file=pending-ci.tar
+      - run:
+          name: Store metadata
+          command: env | wc -l
+      - run:
+          command: df -h
+      - run:
+          command: nice -n 0 ./node-v3
+
+workflows:
+  matrix:
+    jobs:
+      - device_unlock_eager
+      - id_054357_soft
+      - dotnet8-ship:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - Run_App3:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - all-greens:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - europa-beta:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - green-light:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - aug25-cleanup:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - shippit-80:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - canary-v2:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - ship-it:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - q3-smoke:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - qa-2:
+          requires:
+            - device_unlock_eager
+            - id_054357_soft
+      - JTXLm
+      - BUILD_UAT:
+          requires:
+            - JTXLm
+      - b6-6f-39:
+          requires:
+            - JTXLm
+      - cerberus-v2:
+          requires:
+            - b6-6f-39
+      - msTimer:
+          requires:
+            - b6-6f-39
+      - update-retry-reload:
+          requires:
+            - msTimer
+      - processprofile:
+          requires:
+            - msTimer
+      - v2-nightly4:
+          requires:
+            - processprofile
+      - Price2SVM:
+          requires:
+            - processprofile
+      - callisto-beta:
+          requires:
+            - Price2SVM
+      - eded
+      - validate-full-artifact-bundle:
+          requires:
+            - eded
+      - donut-promise:
+          requires:
+            - eded
+      - artifacts:
+          requires:
+            - donut-promise
+      - quebec-pointer:
+          requires:
+            - donut-promise
+      - dotnet8-fmt:
+          requires:
+            - quebec-pointer
+      - triUuidPanel:
+          requires:
+            - quebec-pointer
+      - v6-preview:
+          requires:
+            - triUuidPanel
+      - broker-v5-scratch-amd64:
+          requires:
+            - triUuidPanel
+      - b:
+          requires:
+            - broker-v5-scratch-amd64
+      - cntObj:
+          requires:
+            - broker-v5-scratch-amd64
+      - rm-cache:
+          requires:
+            - cntObj
+      - route20041202:
+          requires:
+            - cntObj
+      - RolloutPipeline:
+          requires:
+            - route20041202
+      - armor-header:
+          requires:
+            - route20041202
+      - v3-alpha:
+          requires:
+            - armor-header
+      - panelShouldVisit
+      - pickActive
+      - API-195:
+          requires:
+            - panelShouldVisit
+            - pickActive
+      - bob-ship:
+          requires:
+            - panelShouldVisit
+            - pickActive
+      - whiskey-9:
+          requires:
+            - panelShouldVisit
+            - pickActive
+      - feb5-canary:
+          requires:
+            - panelShouldVisit
+            - pickActive
+      - victor:
+          requires:
+            - panelShouldVisit
+            - pickActive
+      - orion-rev:
+          requires:
+            - panelShouldVisit
+            - pickActive
